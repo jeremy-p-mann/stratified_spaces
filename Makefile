@@ -1,2 +1,2 @@
 content:
-	pdflatex stratified_spaces/main.tex
+	pdflatex -halt-on-error stratified_spaces/main.tex
