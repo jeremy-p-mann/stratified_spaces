@@ -1,0 +1,286 @@
+\chapter{The Basic Vocabulary}
+\label{ch:the_basic_vocabulary}
+
+
+On a conceptual level, the reader is invited to think of a stratified space as
+a potentially singular manifold, along with a hierarchy of distinguished closed
+subsets. As we will see shortly, these hierarchies may be conveniently
+parametrized by a poset. 
+
+
+\subsection{The Category of Stratified Spaces}
+
+
+Recall any poset $P$ may be endowed with a topology. Within this topology, a
+subset $A\subset P$ is open if, for any $a \in A$ and $p \in P$,  if $p \geq
+a$, then $p \in A$. In other words, open subsets are those which are "closed
+upwards." Continuous maps between two such posets are precisely those which are
+order-preserving
+
+\begin{defi}
+A \textit{stratified space} is the data of:
+\begin{itemize}
+\item A paracompact Hausdorff space $X$, and a poset $P$
+\item A continuous map $X \rightarrow P$
+\end{itemize}
+    We will refer to $X$ as the \textit{underlying topological
+    space} of $(X \rightarrow P)$, and $P$ the \textit{stratifying poset}. We
+    will neglect the data of the poset in our notation. 
+\end{defi}
+
+\begin{ex}
+The map:
+\begin{align*}
+[0, 1) &\rightarrow \{0 < 1\} \\
+0 &\longmapsto 0 \\
+0< t &\longmapsto 1
+\end{align*}
+gives the half open interval the structure of a stratified space. 
+\end{ex}
+We can extend the above construction to higher dimensions:
+
+\begin{ex}
+Geometric simplices stratified spaces:
+\begin{align*}
+\Delta^p &\rightarrow \{0 < 1 \dots <p \} \\
+( t_0, \dots t_n) &\mapsto \mathrm{max}_i \{ t_i \neq 0\}
+\end{align*}
+Where 
+$\Delta^p = \{ (t_0 , \dots , t_p) \in [0, 1]^{\times p} | \sum t_i =1 \}$. 
+\end{ex}
+
+\begin{ex}
+    The data of a topological space $X$ and a point of $X$, $x \in X$
+    can be encoded as a stratified space $(X, x)$:
+\begin{align*}
+X &\longrightarrow \{0 <1\} \\
+x &\longmapsto 0 \\
+y \in X - \{x\} & \longmapsto 1
+\end{align*}
+    This generalizes to the data of a space with a sequence of
+    increasing closed subsets. Therefore, stratified spaces in the classical
+    sense are stratified spaces in the above sense. The above definition is
+    chosen as allowing more general posets leads to a better behaved category.
+    For example, this category has coproducts. 
+\end{ex}
+
+\begin{defi}
+A map of stratified spaces $f :(X\rightarrow P) \rightarrow (Y \rightarrow Q)$
+is a commutative square of the form:
+$$
+\begin{tikzcd}
+X \arrow[r, "f"] \arrow[d] & Y \arrow[d] \\
+P \arrow[r]                & Q          
+\end{tikzcd}
+$$
+Therefore, stratified spaces form a category in the obvious way. 
+\end{defi}
+
+\begin{ex}
+Given $p \in P$, we obtain an inclusion of stratified spaces:
+$$
+\begin{tikzcd}
+X|_p \arrow[d] \arrow[r, hook] & X \arrow[d] \\
+\{p\} \arrow[r, "p"]           & P          
+\end{tikzcd}
+$$
+We will refer to such an $X|_p$ as a \textit{stratum} of $X$
+\end{ex}
+
+\subsection{Cones}
+
+Given a partially ordered set $P$, we can formally adjoin a minimal element,
+$^\triangleleft P$. In the category of posets, this sits in a pushout square:
+$$
+\begin{tikzcd}
+P \times \{0\} \arrow[r] \arrow[d] & P \times \{0<1\} \arrow[d] \\
+{0} \arrow[r]                      & ^\triangleleft P          
+\end{tikzcd}
+$$
+\begin{ex}
+ $^\triangleleft \{ 1<\dots <n\} \simeq \{0 < 1 \dots < n\}$,
+\end{ex}
+
+The next definition extends this construction to stratified spaces:
+
+\begin{defi}
+Given a stratified space $(L \rightarrow P)$, the \textit{open cone on} $L$,
+$C(L\rightarrow P ) = (C(L) \rightarrow C(P)$ is:
+\begin{itemize}
+    \item $C(L)$ is defined to be the pushout of topological
+    spaces: $ * \amalg_{L \times \{0\}} L\times ([0, 1)$, and the
+    stratifying poset to be $C(P) = ^\triangleleft P$
+    \item The stratifying poset is the map on pushouts induced by:
+    $$
+    \begin{tikzcd}
+    * \arrow[d] & L\times \{0\} \arrow[d] \arrow[l] \arrow[r] & {L \times [0, 1)} \arrow[d] \\
+    *           & P\times 0 \arrow[l] \arrow[r]               & P \times \{0 < 1\}         
+    \end{tikzcd}
+    $$
+\end{itemize}
+
+We will refer to $(L\rightarrow P)$ as the \textit{Link}. Note that this sits
+in a pushout diagram in the category of stratified spaces:
+$$
+\begin{tikzcd}
+L\times \{0\} \arrow[r] \arrow[d] & {L\times [0, 1)} \arrow[d] \\
+* \arrow[r]                       & C(L)                      
+\end{tikzcd}
+$$
+\end{defi}
+
+\begin{rek} 
+    Replacing $[0 , 1)$ by $[0, 1]$ in the above definition gives the
+    \textit{closed cone}, $\overline{C}(L)$
+\end{rek}
+
+\begin{ex}
+    Given a finite set $I\rightarrow *$, $C(I)$ is a "graph" with
+    $I$-half edges and a single vertex. Note that $C(I \rightarrow *)$ is
+    different from $C(I \rightarrow I)$, where we are viewing $I$ as a discrete
+    poset. For example, a map $C(I \rightarrow *) \rightarrow (X\rightarrow P)$
+    must send all of the half edges to the same stratum of $X$.
+\end{ex}
+
+\begin{ex}
+We can build simplices inductively: 
+$$
+\overline{C}(\Delta^p \rightarrow \{0 < 1 \dots <p \}) \simeq (\Delta^{p+1} \rightarrow \{0 < 1 \dots < p+1 \})
+$$
+\end{ex}
+
+\begin{ex}
+Note that:
+\begin{itemize}
+    \item $C(S^1) \simeq (\R^2, 0)$
+    \item $C(*)\times \R \simeq (\R \times \R_{\geq 0}, \R \times \{0\})$ 
+    \item $C( S^1 \amalg *)$ looks looks like the union of $\R^2$ and a line
+    through the origin. In particular, it's not a manifold. 
+\end{itemize}
+\end{ex}
+
+\begin{rek} 
+    Note that the projection map: $L\times [0, 1] \rightarrow [0, 1]$
+    extends to a map out of the closed cone $C(L)\rightarrow ([0, 1], 0)$
+\end{rek}
+
+
+
+\subsection{Special Maps}
+
+We now define two classes of maps: open embeddings and refinements. 
+
+\begin{defi}
+    We'll refer to a map $f (X\rightarrow P) \rightarrow (Y
+    \rightarrow Q)$ as an \textit{open embedding} if:
+\begin{itemize}
+    \item The map $f: X \rightarrow Y$ and $P\rightarrow Q$ are open embeddings
+    of topological spaces 
+    \item The map $f|_p: X_p \rightarrow Y|_{f(p)}$ is an open embedding for 
+    every $p \in P$.
+\end{itemize}
+\end{defi}
+
+\begin{rek}
+    Note that this notion of an open embedding makes explicit reference to the 
+    stratifying poset. 
+\end{rek}
+
+\begin{defi}
+We'll refer to a map $f (X\rightarrow P) \rightarrow (Y \rightarrow Q)$ as a \textit{refinement} if: 
+\begin{itemize}
+    \item $f: X \rightarrow Y$ is an homeomorphism
+    \item $f|_p: X_p \rightarrow Y|_{f(p)}$ is a homeomorphism for every $p 
+    \in P$.
+\end{itemize}
+\end{defi}
+
+\begin{ex}
+Using the notation in example (-) , the map:
+$$
+\begin{tikzcd}
+{(\R, 0)} \arrow[d] \arrow[r] & \R \arrow[d] \\
+\{0<1\} \arrow[r]             & *           
+\end{tikzcd}
+$$
+is a refinement.
+\end{ex}
+
+\begin{rek}
+A refinement map can be thought of as the "disappearance" of a strata.
+\end{rek}
+
+
+\subsection{$C^0$ stratified spaces}
+
+\begin{defi} 
+The category of $C^0$ stratified spaces is the smallest full subcategory of stratified spaces satisfying:
+\begin{enumerate}
+    \item $\emptyset \rightarrow \emptyset$ and $*\rightarrow *$ are $C^0$
+        stratified spaces.
+    \item If $(L\rightarrow P)$ is a $C^0$ stratified space, the
+        $C(L \rightarrow P)$ is a stratified space
+    \item If $X$ is a $C^0$ stratified space, then $X\times \R$ is a $C^0$
+        stratified space
+    \item If $X$ openly embeds in a $C^0$ stratified space, $X$ is a $C^0$
+        stratified space
+    \item If $X$ is covered by a collection $C^0$ stratified spaces, then $X$
+        is a $C^0$ stratified space.
+\end{enumerate}
+\end{defi}
+
+\begin{ex}
+    Note that properties (1), (3), (4), and (5) is a defintion of the category
+    of topological manifolds. Therefore, topological manifolds are $C^0$
+    stratified space. These are those $C^0$ stratified spaces whose stratifying
+    poset is $*$. Therefore, each strata of a $C^0$ stratified space is a
+    topological manifold. 
+\end{ex}
+
+One way to understand $C^0$ stratified spaces is to build it by gluing
+stratified spaces of the form $C(L)\times \R^n$ along open embedding. 
+
+\begin{defi}
+A stratified space of the form:
+$$
+C(L) \times \R^n
+$$
+will be referred to as a \textit{basic}
+\end{defi}
+
+\begin{rek}
+    A stratified space is a $C^0$-stratified space if and only if it
+    admits a cover by basics.
+
+    Therefore, every point of a $C^0$-stratified space, $x \in X$ has an open
+    nieghborhood of the form $\overline{C}(L)\times \R^n$. Note that there
+    exists an inclusion: $ L \times \{1\}\times \R^n \rightarrow
+    \overline{C}(L)\times \R^n$. We will refer to $L\times \R^n$ as the
+    \textit{ link around }$x\in X$.
+\end{rek} 
+
+\begin{ex}
+    let $G = (V, E, s, t)$ be a directed graph in which every point has finite
+    valence and finitely many vertices, where $s, t: E \rightarrow V$ be
+    functions encoding which vertex an edge is attached to. This can be
+    realized as a stratified space of the form $G \rightarrow \{0 < 1 \} $ in
+    the obvious way. The 0-strata are the vertices, while the 1-strata are
+    edges. This is a $C^0$ stratified space because it admits a cover by $C^0$
+    stratified spaces of the form $\R$ (edges) and $C(I)$, where the
+    cardinality of $I$ coincides with its valency.
+
+    Note that a every map of graphs gives a map of $C^0$ stratified spaces of
+    the form: 
+
+    $$
+    \begin{tikzcd}
+    G_0 \arrow[rd] \arrow[rr] &           & G_1 \arrow[ld] \\
+                              & \{0 < 1\} &               
+    \end{tikzcd}
+    $$
+
+    The fact that the map lies over ${0 < 1}$ enforces the condition that vertices
+    are sent to vertices and edges are sent to edges. This example illustrates
+    one of the important features of stratified spaces: they accommodate
+    "singular" objects (which are not too singular). 
+\end{ex}
